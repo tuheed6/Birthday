@@ -157,7 +157,7 @@ h1 {
 
 /* Enhanced Cake Section */
 .cake-section {
-  margin: 60px 0;
+  margin: 40px 0 100px;
   position: relative;
   min-height: 400px;
   transition: opacity 0.8s ease;
@@ -433,7 +433,7 @@ h1 {
 /* Final surprise button */
 .surprise-btn {
   display: none;
-  margin: 60px 0 40px;
+  margin: 30px 0 40px;
   padding: 20px 50px;
   font-size: 1.5rem;
   color: white;
@@ -606,7 +606,7 @@ h1 {
     </div>
     <p class="cake-message">🎂 Make a wish my queen! 🎂</p>
     
-    <!-- Final Surprise Button (inside cake section) -->
+    <!-- Final Surprise Button -->
     <button class="surprise-btn">
       <span>Open Your Final Surprise 🎁</span>
     </button>
@@ -635,7 +635,6 @@ const CONFIG = {
     "I care about you sooo much my queen! 💖"
   ],
   allCandlesMessage: "🎂 Your wish is on its way my love! 🎂",
-  surprisePage: "tree.html",
   sparkleCount: 30
 };
 
@@ -795,14 +794,21 @@ let redirecting = false;
 
 surpriseBtn.addEventListener('click', function(e) {
   e.stopPropagation();
-  if (redirecting) return; // stop double fire
+  if (redirecting) return;
   redirecting = true;
 
   document.body.style.transition = 'opacity 1s ease';
   document.body.style.opacity = '0';
 
   setTimeout(() => {
-    window.location.href = CONFIG.surprisePage;
+    // Create an iframe to navigate to the surprise page
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'tree.html';
+    document.body.appendChild(iframe);
+    
+    // Also try window.location as backup
+    window.location.href = 'tree.html';
   }, 1000);
 });
 

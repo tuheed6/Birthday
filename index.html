@@ -791,20 +791,21 @@ document.addEventListener('click', () => {
   }
 }, { once: true });
 
-// FINAL SURPRISE BUTTON
+let redirecting = false;
+
 surpriseBtn.addEventListener('click', function(e) {
   e.stopPropagation();
-  
-  // Fade out the body
+  if (redirecting) return; // stop double fire
+  redirecting = true;
+
   document.body.style.transition = 'opacity 1s ease';
   document.body.style.opacity = '0';
 
-  // Wait for transition to complete, then redirect
-  document.body.addEventListener('transitionend', function handler() {
-    window.location.href = CONFIG.surprisePage; // Make sure this path is correct
-    document.body.removeEventListener('transitionend', handler);
-  });
+  setTimeout(() => {
+    window.location.href = CONFIG.surprisePage;
+  }, 1000);
 });
+
 
 // ==========================================
 // INITIALIZE

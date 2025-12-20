@@ -797,18 +797,15 @@ surpriseBtn.addEventListener('click', function(e) {
   if (redirecting) return;
   redirecting = true;
 
+  // Show alert to confirm navigation
+  alert('🎁 Opening your surprise... Get ready! 💕');
+  
   document.body.style.transition = 'opacity 1s ease';
   document.body.style.opacity = '0';
 
   setTimeout(() => {
-    // Create an iframe to navigate to the surprise page
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'tree.html';
-    document.body.appendChild(iframe);
-    
-    // Also try window.location as backup
-    window.location.href = 'tree.html';
+    // Navigate to the surprise page
+    window.location.href = './tree.html';
   }, 1000);
 });
 
